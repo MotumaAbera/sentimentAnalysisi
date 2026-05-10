@@ -1,0 +1,12 @@
+
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md
+
+# Project runtime artifacts
+imdb_sentiment_pyspark_project/data/*.csv
+imdb_sentiment_pyspark_project/.ipynb_checkpoints/
+imdb_sentiment_pyspark_project/notebooks/.ipynb_checkpoints/
+imdb_sentiment_pyspark_project/spark-warehouse/
+imdb_sentiment_pyspark_project/metastore_db/
+imdb_sentiment_pyspark_project/derby.log

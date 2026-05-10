@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IMDb Sentiment Analysis with PySpark</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #506070;
+      --accent: #2a9d8f;
+      --warm: #e76f51;
+      --gold: #f4a261;
+      --paper: #f7f9fb;
+      --line: #d8e1e8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .deck {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      transition: transform 250ms ease;
+    }
+    section {
+      min-width: 100vw;
+      height: 100vh;
+      padding: 5vh 7vw;
+      display: grid;
+      align-content: center;
+      gap: 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef5f7 100%);
+    }
+    h1 {
+      font-size: 54px;
+      line-height: 1.05;
+      margin: 0;
+      max-width: 980px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 42px;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    p, li {
+      font-size: 24px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    ul { margin: 0; padding-left: 30px; }
+    .kicker {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      min-height: 150px;
+    }
+    .card strong {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+    .step {
+      background: #fff;
+      border-top: 8px solid var(--accent);
+      border-radius: 8px;
+      padding: 18px;
+      font-size: 20px;
+      color: var(--ink);
+      min-height: 120px;
+    }
+    .bar {
+      height: 34px;
+      background: var(--accent);
+      margin: 12px 0;
+      color: #fff;
+      padding: 6px 12px;
+      font-weight: 700;
+      border-radius: 4px;
+    }
+    .bar.orange { background: var(--warm); width: 88%; }
+    .bar.gold { background: var(--gold); width: 78%; color: var(--ink); }
+    .bar.green { width: 96%; }
+    .footer {
+      position: fixed;
+      bottom: 18px;
+      left: 7vw;
+      right: 7vw;
+      display: flex;
+      justify-content: space-between;
+      color: #687887;
+      font-size: 14px;
+    }
+    @media (max-width: 800px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 30px; }
+      p, li { font-size: 18px; }
+      section { padding: 5vh 6vw; }
+      .grid, .flow { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section>
+      <div class="kicker">DASC6021 Big Data Analytics & Data Visualization</div>
+      <h1>Sentiment Analysis of IMDb Movie Reviews Using Apache Spark and PySpark Machine Learning</h1>
+      <p>Group project presentation | Replace with group names</p>
+    </section>
+    <section>
+      <h2>Project Goal</h2>
+      <p>Classify IMDb movie reviews into positive and negative sentiment categories using a scalable PySpark machine learning workflow.</p>
+      <div class="grid">
+        <div class="card"><strong>Input</strong><p>Large CSV file of movie review text and sentiment labels.</p></div>
+        <div class="card"><strong>Processing</strong><p>Spark DataFrames, cleaning, tokenization, stopword removal, TF-IDF.</p></div>
+        <div class="card"><strong>Output</strong><p>Model comparison using accuracy, precision, recall, and F1-score.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Why Spark?</h2>
+      <ul>
+        <li>Distributed processing for large text datasets.</li>
+        <li>DataFrame API for scalable cleaning and aggregation.</li>
+        <li>ML pipelines for reproducible feature extraction and classification.</li>
+        <li>Same notebook can run locally or on a cluster.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Data Pipeline</h2>
+      <div class="flow">
+        <div class="step">Load CSV into Spark DataFrame</div>
+        <div class="step">Clean review text and encode labels</div>
+        <div class="step">Tokenize and remove stopwords</div>
+        <div class="step">Extract TF-IDF features</div>
+        <div class="step">Train and evaluate models</div>
+      </div>
+    </section>
+    <section>
+      <h2>Models Compared</h2>
+      <div class="grid">
+        <div class="card"><strong>Logistic Regression</strong><p>Strong baseline for sparse TF-IDF features.</p></div>
+        <div class="card"><strong>Naive Bayes</strong><p>Fast probabilistic model for text classification.</p></div>
+        <div class="card"><strong>Decision Tree</strong><p>Interpretable model used as a non-linear comparison.</p></div>
+      </div>
+    </section>
+    <section>
+      <h2>Evaluation Metrics</h2>
+      <ul>
+        <li><strong>Accuracy:</strong> overall percentage of correct predictions.</li>
+        <li><strong>Precision:</strong> reliability of positive predictions.</li>
+        <li><strong>Recall:</strong> ability to find actual positive reviews.</li>
+        <li><strong>F1-score:</strong> balanced measure of precision and recall.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Expected Result Pattern</h2>
+      <div class="bar green">Logistic Regression: strongest expected TF-IDF performance</div>
+      <div class="bar orange">Naive Bayes: competitive and efficient baseline</div>
+      <div class="bar gold">Decision Tree: interpretable but weaker on sparse text</div>
+      <p>Replace this slide with actual metric values after running the notebook.</p>
+    </section>
+    <section>
+      <h2>Key Insights</h2>
+      <ul>
+        <li>TF-IDF highlights words that distinguish positive and negative reviews.</li>
+        <li>Linear models are usually well suited to high-dimensional text vectors.</li>
+        <li>Errors may come from sarcasm, negation, mixed opinions, and plot-heavy reviews.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Limitations and Future Work</h2>
+      <ul>
+        <li>Bag-of-words features do not fully capture word order or context.</li>
+        <li>Future work could test n-grams, feature selection, hyperparameter tuning, or transformer embeddings.</li>
+        <li>The workflow can scale to larger datasets using a Spark cluster.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Conclusion</h2>
+      <p>The project delivers a complete PySpark sentiment analysis pipeline for IMDb movie reviews, including scalable preprocessing, TF-IDF features, three machine learning classifiers, evaluation metrics, and visual results.</p>
+    </section>
+  </main>
+  <div class="footer">
+    <span>Use left/right arrows to navigate</span>
+    <span id="counter">1 / 10</span>
+  </div>
+  <script>
+    const deck = document.getElementById('deck');
+    const slides = Array.from(deck.children);
+    const counter = document.getElementById('counter');
+    let index = 0;
+    function showSlide(next) {
+      index = Math.max(0, Math.min(slides.length - 1, next));
+      deck.style.transform = `translateX(${-index * 100}vw)`;
+      counter.textContent = `${index + 1} / ${slides.length}`;
+    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === ' ') showSlide(index + 1);
+      if (event.key === 'ArrowLeft') showSlide(index - 1);
+    });
+    showSlide(0);
+  </script>
+</body>
+</html>
