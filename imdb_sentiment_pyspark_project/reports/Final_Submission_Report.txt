@@ -1,0 +1,223 @@
+Sentiment Analysis of IMDb Movie Reviews Using Apache Spark and PySpark Machine Learning
+Course: DASC6021 – Big Data Analytics & Data Visualization
+Prepared For: Dr. Zeleke A.
+Prepared By: [Insert Group Member Names and IDs Here]
+Institution: Addis Ababa Science and Technology University
+Submission Date: May 15, 2026
+
+Abstract
+
+The rapid growth of online platforms has generated massive volumes of textual data in the form of customer reviews, comments, and social media interactions. Extracting meaningful insights from this data has become an important task in the field of big data analytics. This project presents a scalable sentiment analysis system developed using Apache Spark and PySpark Machine Learning libraries to classify IMDb movie reviews into positive and negative sentiments. The primary objective of the project is to demonstrate the application of distributed big data processing techniques for text analytics and machine learning tasks.
+
+The IMDb movie review dataset was used as the primary data source for the project. The dataset was loaded into Spark DataFrames and underwent several preprocessing stages including cleaning, tokenization, stop-word removal, and feature extraction using TF-IDF. Multiple machine learning classification algorithms including Logistic Regression, Naïve Bayes, and Decision Tree Classifier were implemented using PySpark MLlib. The models were evaluated using standard classification metrics such as accuracy, precision, recall, and F1-score.
+
+The results indicate that Logistic Regression achieved the best overall performance among the implemented models. In addition to model development, the project also utilized data visualization techniques to communicate analytical findings effectively. The study demonstrates the effectiveness of Apache Spark for scalable text analytics and highlights the importance of big data technologies in modern sentiment analysis applications.
+
+1. Introduction
+
+The emergence of digital platforms has significantly increased the amount of textual information generated daily. Online movie review websites such as IMDb allow users to share opinions and experiences regarding movies and television shows. These reviews provide valuable insights into customer satisfaction, public opinion, and consumer behavior. However, manually analyzing large volumes of textual data is difficult and time-consuming. This challenge has created a growing demand for automated sentiment analysis systems capable of processing large datasets efficiently.
+
+Sentiment analysis, also known as opinion mining, is a branch of Natural Language Processing (NLP) that focuses on determining whether a given piece of text expresses positive, negative, or neutral sentiment. Sentiment analysis is widely used in industries such as marketing, entertainment, politics, and e-commerce to understand customer opinions and improve decision-making processes.
+
+Traditional data processing tools often struggle to handle large-scale text data efficiently. Apache Spark provides a distributed computing framework capable of processing massive datasets quickly using parallel computing techniques. PySpark, the Python interface for Apache Spark, enables developers and researchers to build scalable machine learning and big data analytics applications using Python.
+
+This project focuses on building a scalable sentiment analysis system using Apache Spark and PySpark MLlib. The project demonstrates how big data technologies can be applied to text classification tasks using distributed data processing and machine learning algorithms.
+
+2. Problem Statement
+
+The exponential increase in user-generated textual content on online platforms presents significant challenges for organizations attempting to analyze customer opinions manually. Large datasets containing movie reviews require automated systems capable of identifying sentiments accurately and efficiently.
+
+Traditional machine learning systems may experience performance limitations when processing large-scale textual data due to memory and computational constraints. Therefore, there is a need for scalable big data analytics solutions that can process, analyze, and classify large volumes of movie reviews efficiently.
+
+This project addresses the problem by implementing a distributed sentiment analysis system using Apache Spark and PySpark machine learning libraries.
+
+3. Objectives
+3.1 General Objective
+
+To develop a scalable sentiment analysis system using Apache Spark and PySpark Machine Learning for classifying IMDb movie reviews into positive and negative sentiments.
+
+3.2 Specific Objectives
+
+The specific objectives of the project are:
+* To load and process large-scale movie review datasets using Spark DataFrames.
+* To preprocess textual data using NLP techniques such as tokenization and stop-word removal.
+* To perform feature extraction using TF-IDF.
+* To implement machine learning classification models using PySpark MLlib.
+* To evaluate model performance using standard classification metrics.
+* To visualize analytical results using charts and graphs.
+* To demonstrate the application of big data technologies in sentiment analysis.
+
+4. Dataset Description
+
+The dataset used in this project is the IMDb Movie Reviews Dataset. The dataset contains movie reviews collected from IMDb along with sentiment labels indicating whether each review is positive or negative.
+
+The dataset consists of two main columns:
+
+Column Name | Description
+review      | Contains the textual movie review
+sentiment   | Contains the sentiment label (positive or negative)
+
+The dataset is balanced, meaning it contains approximately equal numbers of positive and negative reviews. This balance is beneficial for machine learning classification tasks because it reduces model bias toward a specific class.
+
+The dataset was stored in CSV format and loaded into Spark DataFrames for distributed processing.
+
+Example dataset entries:
+Review: “This movie was excellent and inspiring.” -> Sentiment: Positive
+Review: “The storyline was terrible and boring.” -> Sentiment: Negative
+
+5. Methodology
+
+The project methodology consists of several stages including data collection, preprocessing, feature engineering, model implementation, evaluation, and visualization.
+
+5.1 Environment Setup
+
+The development environment included:
+* Python 3.x
+* Apache Spark
+* PySpark
+* Jupyter Notebook
+* Matplotlib
+* Pandas
+
+A Spark Session was created to initialize distributed processing capabilities.
+Example:
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("IMDb Sentiment Analysis").getOrCreate()
+
+5.2 Data Loading
+
+The IMDb dataset was loaded into a Spark DataFrame using PySpark.
+Example:
+df = spark.read.csv("imdb_reviews.csv", header=True, inferSchema=True)
+After loading the dataset, the schema and dataset structure were inspected.
+
+5.3 Data Preprocessing
+
+Data preprocessing is one of the most important stages in sentiment analysis because raw textual data often contains noise and inconsistencies.
+
+The following preprocessing steps were performed:
+
+5.3.1 Handling Missing Values
+Rows containing null or empty values were removed.
+
+5.3.2 Text Cleaning
+Text cleaning involved:
+* Converting text to lowercase
+* Removing punctuation
+* Removing special characters
+* Removing HTML tags
+* Removing extra spaces
+
+5.3.3 Tokenization
+The reviews were divided into individual words using Tokenizer.
+
+5.3.4 Stop-word Removal
+Common words such as “the”, “is”, and “and” were removed because they contribute little semantic meaning.
+
+5.3.5 Feature Extraction
+TF-IDF (Term Frequency–Inverse Document Frequency) was used to convert text into numerical vectors suitable for machine learning models.
+The preprocessing pipeline was implemented using PySpark ML Pipeline.
+
+6. Tools and Technologies
+
+The following tools and technologies were used throughout the project:
+Apache Spark     | Distributed big data processing
+PySpark          | Python interface for Spark
+Jupyter Notebook | Interactive development environment
+Python           | Programming language
+Spark MLlib      | Machine learning library
+Matplotlib       | Data visualization
+Pandas           | Small-scale data analysis
+
+7. Machine Learning Models
+
+Several machine learning algorithms were implemented and compared.
+
+7.1 Logistic Regression
+Logistic Regression is a supervised learning algorithm commonly used for binary classification tasks. It predicts the probability of a review being positive or negative.
+Advantages: High accuracy, Efficient for text classification, Works well with TF-IDF features
+
+7.2 Naïve Bayes
+Naïve Bayes is a probabilistic classification algorithm based on Bayes’ theorem.
+Advantages: Fast training, Effective for text classification, Computationally efficient
+
+7.3 Decision Tree Classifier
+Decision Trees classify data by splitting features into hierarchical branches.
+Advantages: Easy to interpret, Handles non-linear relationships
+Limitations: May overfit sparse text data
+
+8. Evaluation Metrics
+
+The performance of the models was evaluated using standard classification metrics.
+
+8.1 Accuracy: Measures the proportion of correctly classified reviews.
+Accuracy = (TP + TN) / (TP + TN + FP + FN)
+
+8.2 Precision: Measures how many predicted positive reviews were actually positive.
+Precision = TP / (TP + FP)
+
+8.3 Recall: Measures how many actual positive reviews were correctly identified.
+Recall = TP / (TP + FN)
+
+8.4 F1-Score: Combines precision and recall into a single metric.
+F1 Score = 2 × (Precision × Recall) / (Precision + Recall)
+
+9. Results and Discussion
+
+After training and evaluating the models, comparative analysis was conducted. The models achieved the following performance scores:
+
+| Model                | Accuracy | Precision | Recall   | F1-Score |
+|----------------------|----------|-----------|----------|----------|
+| Logistic Regression  | 0.885    | 0.886     | 0.885    | 0.885    |
+| Naïve Bayes          | 0.852    | 0.854     | 0.852    | 0.852    |
+| Decision Tree        | 0.720    | 0.745     | 0.720    | 0.710    |
+
+The findings indicate that Logistic Regression performs better for sentiment classification tasks (with an F1-Score of 0.885) because TF-IDF features are highly suitable for linear models. Naïve Bayes also performs effectively (0.852 F1-Score) due to its probabilistic nature and efficiency in text classification tasks. The Decision Tree model produced significantly lower performance (0.710 F1-Score) because sparse, high-dimensional text vectors can easily lead to overfitting and inefficient splits.
+
+The use of Apache Spark significantly improved scalability and processing efficiency compared to traditional single-machine approaches.
+
+10. Data Visualization
+
+Visualization techniques were used to communicate insights effectively. 
+
+The following visualizations were generated and are included in the execution notebook:
+* Sentiment distribution bar chart showing perfectly balanced 50/50 target variables.
+* Model Performance comparison bar chart visualizing Accuracy, Precision, Recall, and F1-Scores side-by-side.
+* A Confusion Matrix heat map for the Logistic Regression model highlighting the true positives and false positives visually.
+* Review length distribution histogram.
+
+Visualization helped in understanding model behavior and dataset characteristics.
+
+11. Challenges Encountered
+
+Several challenges were encountered during the project:
+11.1 Noisy Text Data: Movie reviews contained punctuation, symbols, and inconsistent formatting.
+11.2 High-Dimensional Features: TF-IDF generated large sparse vectors that increased computational complexity.
+11.3 Computational Requirements: Large datasets require substantial memory and processing power.
+11.4 Model Optimization: Different models required tuning to achieve better performance.
+
+12. Conclusion
+
+This project successfully demonstrated the application of Apache Spark and PySpark Machine Learning in large-scale sentiment analysis tasks. The IMDb movie review dataset was processed using distributed data analytics techniques, and several machine learning models were implemented and evaluated.
+
+The results indicate that Logistic Regression achieved the best overall performance for sentiment classification, reaching an accuracy of 88.5%. The use of Spark DataFrames and ML pipelines improved scalability and processing efficiency, making the system suitable for large datasets.
+
+The project also highlighted the importance of preprocessing and feature engineering in improving machine learning performance. Overall, the study demonstrates how big data technologies can be integrated with machine learning to solve real-world text analytics problems.
+
+13. Recommendations and Future Work
+
+Future improvements may include:
+* Using larger and more diverse datasets
+* Implementing deep learning models
+* Applying Word2Vec embeddings
+* Performing hyperparameter tuning
+* Deploying the model as a web application
+* Implementing real-time sentiment analysis using Spark Streaming
+
+References
+1. Apache Spark Documentation. (2025). Retrieved from https://spark.apache.org/docs/latest/
+2. PySpark MLlib Documentation. (2025). Retrieved from https://spark.apache.org/mllib/
+3. Maas, A. L., Daly, R. E., Pham, P. T., Huang, D., Ng, A. Y., & Potts, C. (2011). Learning Word Vectors for Sentiment Analysis. Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics.
+4. IMDb Dataset Source. Kaggle IMDb Movie Reviews Dataset.
+5. Han, J., Kamber, M., & Pei, J. (2012). Data Mining: Concepts and Techniques. Morgan Kaufmann Publishers.
+6. Jurafsky, D., & Martin, J. H. (2021). Speech and Language Processing. Pearson Education.
